@@ -1,0 +1,1805 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Алексей & Виктория — 23.08.2026</title>
+  <meta name="description" content="Свадебное приглашение Алексея и Виктории" />
+  <style>
+    :root{
+      --bg:#f7f3ee;
+      --paper:#fffdf8;
+      --ink:#151515;
+      --muted:#77706a;
+      --line:#151515;
+      --soft-line:rgba(21,21,21,.18);
+      --taupe:#d8c7ba;
+      --coffee:#a98269;
+      --brown:#6b4838;
+      --graphite:#2f3133;
+      --radius:0px;
+      --page-width:1120px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height:1.42;
+      overflow-x:hidden;
+    }
+
+    .serif{font-family: Georgia, "Times New Roman", serif}
+    .wrap{width:min(var(--page-width), calc(100% - 32px)); margin:0 auto}
+    .narrow{width:min(760px, calc(100% - 32px)); margin:0 auto}
+    .center{text-align:center}
+    .muted{color:var(--muted)}
+    a{color:inherit}
+
+    .topbar{
+      position:fixed;
+      z-index:50;
+      top:0; left:0; right:0;
+      height:58px;
+      display:flex;
+      align-items:center;
+      background:rgba(247,243,238,.78);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(21,21,21,.12);
+    }
+    .topbar-inner{
+      width:min(var(--page-width), calc(100% - 32px));
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+    .mini-logo{
+      font-size:12px;
+      letter-spacing:.28em;
+      text-transform:uppercase;
+    }
+    .topbar nav{
+      display:flex;
+      gap:18px;
+      align-items:center;
+    }
+    .topbar a{
+      text-decoration:none;
+      font-size:11px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:#3e3a36;
+    }
+
+    .hero{
+      min-height:100vh;
+      padding:88px 0 56px;
+      display:flex;
+      align-items:center;
+      position:relative;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+      gap:44px;
+      align-items:end;
+    }
+
+    .hero-photo{
+      position:relative;
+      height:min(72vh, 720px);
+      min-height:520px;
+      overflow:hidden;
+      background:#bbb url("hero-photo.jpg") center center/cover no-repeat;
+      filter:grayscale(1);
+    }
+    .hero-photo:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.34));
+    }
+    .hero-title{
+      position:absolute;
+      left:clamp(18px, 4vw, 56px);
+      bottom:clamp(18px, 4vw, 54px);
+      z-index:2;
+      color:white;
+    }
+    .hero-title .over{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.34em;
+      margin-bottom:18px;
+    }
+    h1{
+      margin:0;
+      font-size:clamp(54px, 9vw, 124px);
+      line-height:.82;
+      font-weight:400;
+      letter-spacing:-.055em;
+      text-shadow:0 8px 40px rgba(0,0,0,.18);
+    }
+    .amp{font-style:italic; letter-spacing:-.08em}
+
+    .hero-aside{
+      min-height:520px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      padding:10px 0;
+    }
+    .date-vertical{
+      display:grid;
+      grid-template-columns:auto 1fr;
+      gap:20px;
+      align-items:start;
+    }
+    .vertical-word{
+      writing-mode:vertical-rl;
+      transform:rotate(180deg);
+      font-size:11px;
+      letter-spacing:.28em;
+      text-transform:uppercase;
+      padding-top:4px;
+    }
+    .date-big{
+      font-size:clamp(60px, 9vw, 108px);
+      line-height:.82;
+      font-weight:400;
+      letter-spacing:-.06em;
+    }
+    .date-big span{display:block}
+    .intro{
+      border-top:1px solid var(--line);
+      padding-top:26px;
+      font-size:20px;
+    }
+    .music{
+      margin-top:24px;
+      border:1px solid var(--line);
+      padding:12px 14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+    }
+    .music small{
+      display:block;
+      font-size:11px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-top:4px;
+    }
+    .play{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      border:1px solid var(--line);
+      background:transparent;
+      cursor:pointer;
+      font-size:18px;
+      display:grid;
+      place-items:center;
+      flex:none;
+    }
+    audio{display:none}
+
+    .decor-num{
+      position:absolute;
+      right:-20px;
+      bottom:18px;
+      font-size:min(21vw, 260px);
+      line-height:1;
+      color:rgba(21,21,21,.035);
+      pointer-events:none;
+    }
+
+    section{padding:92px 0; position:relative}
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:30px;
+      margin-bottom:44px;
+    }
+    .label{
+      font-size:11px;
+      letter-spacing:.32em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+    .title{
+      font-size:clamp(42px, 7vw, 92px);
+      line-height:.9;
+      letter-spacing:-.055em;
+      font-weight:400;
+      margin:0;
+    }
+    .lead{
+      font-size:clamp(22px, 3vw, 36px);
+      line-height:1.18;
+      letter-spacing:-.025em;
+    }
+
+    .save-grid{
+      display:grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap:56px;
+      align-items:center;
+    }
+    .small-photo{
+      height:460px;
+      background:#aaa url("photo-placeholder.svg") center/cover no-repeat;
+      filter:grayscale(1);
+      position:relative;
+      overflow:hidden;
+    }
+    .small-photo.short{height:320px}
+    .small-photo.wide{height:360px}
+    .caption-line{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-top:22px;
+      font-size:12px;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+    }
+    .caption-line:before{
+      content:"";
+      height:1px;
+      width:72px;
+      background:var(--line);
+    }
+
+    .calendar-count{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:44px;
+      align-items:start;
+    }
+    .calendar-card{
+      border:1px solid var(--line);
+      background:var(--paper);
+      padding:24px;
+    }
+    .cal-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding-bottom:18px;
+      border-bottom:1px solid var(--soft-line);
+      text-transform:uppercase;
+      letter-spacing:.2em;
+      font-size:12px;
+    }
+    .cal-month{
+      text-align:center;
+      padding:26px 0 18px;
+      font-size:36px;
+      line-height:1;
+      font-weight:400;
+    }
+    .week,.days{
+      display:grid;
+      grid-template-columns:repeat(7,1fr);
+      text-align:center;
+      gap:6px;
+    }
+    .week{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--muted);
+      margin-bottom:8px;
+    }
+    .day{
+      min-height:42px;
+      display:grid;
+      place-items:center;
+      position:relative;
+      font-size:15px;
+    }
+    .day.empty{color:transparent}
+    .day.heart{
+      color:white;
+      z-index:1;
+      font-weight:700;
+    }
+    .day.heart:before{
+      content:"♥";
+      position:absolute;
+      color:var(--ink);
+      font-size:54px;
+      line-height:1;
+      z-index:-1;
+      transform:translateY(-2px);
+    }
+    .countdown{
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+    }
+    .count-row{
+      display:grid;
+      grid-template-columns:1fr 120px;
+      align-items:end;
+      border-bottom:1px solid var(--soft-line);
+      padding:18px 0;
+    }
+    .count-row:last-child{border-bottom:0}
+    .count-num{
+      font-size:clamp(58px, 8vw, 102px);
+      line-height:.86;
+      letter-spacing:-.06em;
+      font-weight:400;
+    }
+    .count-name{
+      font-size:12px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:var(--muted);
+      padding-bottom:8px;
+      text-align:right;
+    }
+
+    .place{
+      background:#151515;
+      color:#f7f3ee;
+    }
+    .place .label,.place .muted{color:#bfb6ad}
+    .place-layout{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:34px;
+      align-items:stretch;
+    }
+    .map-box{
+      min-height:420px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px) 0 0/42px 42px,
+        linear-gradient(0deg, rgba(255,255,255,.12) 1px, transparent 1px) 0 0/42px 42px,
+        #222;
+      border:1px solid rgba(247,243,238,.42);
+      position:relative;
+      overflow:hidden;
+    }
+    .map-pin{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      width:82px;
+      height:82px;
+      border-radius:50% 50% 50% 0;
+      border:1px solid #f7f3ee;
+      transform-origin:center;
+      rotate:-45deg;
+      display:grid;
+      place-items:center;
+    }
+    .map-pin:after{
+      content:"";
+      width:22px;
+      height:22px;
+      border-radius:50%;
+      background:#f7f3ee;
+    }
+    .place-card{
+      border:1px solid rgba(247,243,238,.52);
+      padding:38px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:420px;
+    }
+    .button{
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      min-height:50px;
+      padding:0 26px;
+      border:1px solid currentColor;
+      border-radius:999px;
+      text-decoration:none;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-size:12px;
+      background:transparent;
+      cursor:pointer;
+    }
+
+    .program-grid{
+      display:grid;
+      grid-template-columns:.72fr 1.28fr;
+      gap:52px;
+    }
+    .program-list{
+      display:grid;
+      gap:34px;
+    }
+    .event{
+      display:grid;
+      grid-template-columns:110px 1fr;
+      gap:22px;
+      align-items:start;
+      border-bottom:1px solid var(--soft-line);
+      padding-bottom:28px;
+    }
+    .event-time{
+      font-size:38px;
+      line-height:1;
+      letter-spacing:-.04em;
+    }
+    .event h3{
+      margin:0 0 6px;
+      font-size:24px;
+      font-weight:400;
+    }
+
+    .dress{
+      padding-top:40px;
+    }
+    .dress-layout{
+      display:grid;
+      grid-template-columns:120px 1fr .9fr;
+      gap:36px;
+      align-items:center;
+    }
+    .dress-vertical{
+      writing-mode:vertical-rl;
+      transform:rotate(180deg);
+      font-size:clamp(48px, 8vw, 92px);
+      line-height:.9;
+      letter-spacing:-.05em;
+    }
+    .palette-img{
+      display:block;
+      width:100%;
+      border:1px solid var(--soft-line);
+      filter:saturate(.92) contrast(.98);
+      background:white;
+    }
+    .swatches{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:24px;
+    }
+    .sw{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:1px solid rgba(21,21,21,.12);
+    }
+    .s1{background:#e8d3c4}.s2{background:#d2b29a}.s3{background:#b78162}.s4{background:#865d46}.s5{background:#5c4437}.s6{background:#3a3b3d}.s7{background:#111}
+
+    .details{
+      background:var(--paper);
+    }
+    .detail-list{
+      width:min(860px, calc(100% - 32px));
+      margin:0 auto;
+    }
+    .detail-item{
+      display:grid;
+      grid-template-columns:86px 1fr;
+      gap:28px;
+      padding:34px 0;
+      border-top:1px solid var(--line);
+    }
+    .detail-item:last-child{border-bottom:1px solid var(--line)}
+    .detail-num{
+      font-size:54px;
+      line-height:1;
+      letter-spacing:-.05em;
+    }
+    .detail-title{
+      font-size:28px;
+      margin-bottom:10px;
+    }
+    .chat-cta{
+      margin-top:42px;
+      text-align:center;
+    }
+
+    .rsvp{
+      background:#151515;
+      color:#f7f3ee;
+    }
+    .rsvp .label,.rsvp .muted{color:#bfb6ad}
+    .form-shell{
+      border:1px solid rgba(247,243,238,.52);
+      padding:44px;
+      background:#151515;
+    }
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      margin-top:36px;
+    }
+    .full{grid-column:1/-1}
+    label{
+      display:block;
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:#c9bdb2;
+      margin-bottom:9px;
+    }
+    input,select,textarea{
+      width:100%;
+      font:inherit;
+      color:#f7f3ee;
+      background:transparent;
+      border:0;
+      border-bottom:1px solid rgba(247,243,238,.55);
+      border-radius:0;
+      padding:13px 0;
+      outline:0;
+    }
+    option{color:#151515}
+    textarea{min-height:104px; resize:vertical}
+    input:focus,select:focus,textarea:focus{border-bottom-color:#f7f3ee}
+    .checks{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px 18px;
+      margin-top:8px;
+    }
+    .check{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#f7f3ee;
+      text-transform:none;
+      letter-spacing:0;
+      font-size:15px;
+      margin:0;
+    }
+    .check input{width:auto}
+    .submit{
+      margin-top:10px;
+      min-height:54px;
+      padding:0 32px;
+      border:1px solid #f7f3ee;
+      border-radius:999px;
+      background:#f7f3ee;
+      color:#151515;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .ok{
+      display:none;
+      margin-top:18px;
+      padding:16px;
+      border:1px solid rgba(247,243,238,.5);
+      color:#f7f3ee;
+    }
+
+    .final{
+      min-height:70vh;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      background:var(--bg);
+      padding:96px 0;
+    }
+    .monogram{
+      font-size:clamp(90px, 18vw, 220px);
+      line-height:.8;
+      letter-spacing:-.08em;
+      font-weight:400;
+    }
+    .final p{
+      max-width:580px;
+      margin:28px auto 0;
+      font-size:20px;
+    }
+
+    @media(max-width:900px){
+      .topbar nav{display:none}
+      .hero-grid,.save-grid,.calendar-count,.place-layout,.program-grid,.dress-layout,.form-grid{
+        grid-template-columns:1fr;
+      }
+      .hero-photo{height:66vh; min-height:440px}
+      .hero-aside{min-height:auto; gap:34px}
+      .date-vertical{margin-top:0}
+      .section-head{display:block}
+      .calendar-card{padding:18px}
+      .place-card,.form-shell{padding:26px}
+      .dress-vertical{
+        writing-mode:horizontal-tb;
+        transform:none;
+      }
+      .event{grid-template-columns:84px 1fr}
+      .event-time{font-size:30px}
+      .checks{grid-template-columns:1fr}
+      .full{grid-column:auto}
+      .detail-item{grid-template-columns:62px 1fr}
+      .detail-num{font-size:42px}
+      section{padding:72px 0}
+    }
+
+    @media(max-width:520px){
+      .hero{padding-top:74px}
+      h1{font-size:58px}
+      .date-big{font-size:64px}
+      .lead{font-size:22px}
+      .count-row{grid-template-columns:1fr 88px}
+      .count-num{font-size:62px}
+      .cal-month{font-size:30px}
+      .day{min-height:36px}
+      .day.heart:before{font-size:48px}
+    }
+  </style>
+
+<style id="calendar-heart-fix">
+.day.heart{
+  color:var(--ink) !important;
+  font-weight:700;
+  z-index:1;
+}
+.day.heart:before{
+  content:"♥";
+  position:absolute;
+  color:transparent;
+  -webkit-text-stroke:2px #c01d1d;
+  text-stroke:2px #c01d1d;
+  font-size:58px;
+  line-height:1;
+  z-index:-1;
+  transform:translateY(-2px) rotate(-8deg);
+}
+</style>
+
+<style id="place-single-fix">
+.place-layout-single{
+  display:block;
+}
+.place-card-single{
+  width:min(720px, 100%);
+  margin:0 auto;
+  min-height:auto;
+  text-align:center;
+}
+.place-card-single p:last-child{
+  margin-top:34px;
+}
+</style>
+
+<style id="v37-mobile-date-countdown-fix">
+.hero-date-mobile{
+  display:none;
+}
+
+/* Counter in one horizontal line */
+.countdown{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  border:1px solid var(--line);
+  background:var(--paper);
+}
+.count-row{
+  display:block;
+  text-align:center;
+  border-bottom:0;
+  border-right:1px solid var(--soft-line);
+  padding:24px 8px 22px;
+}
+.count-row:last-child{
+  border-right:0;
+}
+.count-num{
+  font-size:clamp(38px, 5vw, 72px);
+  line-height:.9;
+}
+.count-name{
+  text-align:center;
+  padding-bottom:0;
+  margin-top:12px;
+  font-size:11px;
+}
+
+@media(max-width:900px){
+  .hero-photo{
+    position:relative;
+  }
+
+  .hero-date-mobile{
+    display:block;
+    position:absolute;
+    z-index:3;
+    right:clamp(18px, 6vw, 34px);
+    bottom:clamp(18px, 6vw, 34px);
+    color:#fff;
+    font-size:clamp(46px, 15vw, 76px);
+    line-height:.72;
+    letter-spacing:-.06em;
+    text-align:left;
+    text-shadow:0 10px 34px rgba(0,0,0,.35);
+  }
+  .hero-date-mobile span{
+    display:block;
+  }
+
+  /* Hide the old date block on mobile; leave invitation/music below */
+  .hero-aside .date-vertical{
+    display:none;
+  }
+  .hero-aside{
+    padding-top:20px;
+  }
+
+  .intro{
+    margin-top:0;
+  }
+
+  .calendar-count{
+    gap:28px;
+  }
+
+  .countdown{
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+  }
+  .count-row{
+    padding:18px 4px 16px;
+  }
+  .count-num{
+    font-size:clamp(34px, 12vw, 52px);
+  }
+  .count-name{
+    font-size:9px;
+    letter-spacing:.12em;
+  }
+}
+
+@media(max-width:420px){
+  .hero-date-mobile{
+    right:18px;
+    bottom:18px;
+    font-size:48px;
+  }
+
+  .hero-title{
+    left:22px;
+    bottom:26px;
+    max-width:74%;
+  }
+
+  .hero-title h1{
+    font-size:48px;
+  }
+
+  .hero-title .over{
+    font-size:9px;
+    letter-spacing:.28em;
+    margin-bottom:14px;
+  }
+}
+</style>
+
+<style id="dress-no-photo-fix">
+.dress-layout-no-photo{
+  grid-template-columns:120px 1fr;
+  max-width:860px;
+}
+@media(max-width:900px){
+  .dress-layout-no-photo{
+    grid-template-columns:1fr;
+    max-width:none;
+  }
+}
+</style>
+
+<style id="v311-hero-date-fix">
+.hero{
+  overflow:hidden;
+}
+
+@media(max-width:900px){
+  .hero-date-mobile{
+    right:22px;
+    bottom:20px;
+    font-size:44px;
+    line-height:.92;
+    letter-spacing:-.03em;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:6px;
+  }
+
+  .hero-date-mobile span{
+    display:block;
+  }
+
+  .decor-num{
+    display:none;
+  }
+
+  .hero-title{
+    max-width:68%;
+  }
+}
+
+@media(max-width:420px){
+  .hero-date-mobile{
+    right:18px;
+    bottom:18px;
+    font-size:42px;
+    gap:4px;
+  }
+
+  .hero-title{
+    max-width:66%;
+  }
+}
+</style>
+
+<style id="v312-desktop-clean-animation">
+/* v3.12: clean desktop artifact + animation base */
+.decor-num{
+  display:none !important;
+}
+
+/* Hero entrance animations */
+.hero-photo{
+  animation:heroPhotoIn 900ms ease-out both;
+}
+
+.hero-title .over{
+  animation:heroTextIn 900ms ease-out 220ms both;
+}
+
+.hero-title h1{
+  animation:heroTextIn 1050ms ease-out 340ms both;
+}
+
+.hero-date-mobile{
+  animation:heroDateIn 950ms ease-out 520ms both;
+}
+
+.date-vertical{
+  animation:desktopDateIn 950ms ease-out 500ms both;
+}
+
+.intro{
+  animation:fadeUp 850ms ease-out 720ms both;
+}
+
+.music{
+  animation:fadeUp 850ms ease-out 860ms both;
+}
+
+/* Desktop: give the date more air and keep it elegant */
+@media(min-width:901px){
+  .hero-grid{
+    grid-template-columns:minmax(0, 1fr) minmax(300px, 390px);
+  }
+
+  .hero-aside{
+    padding-left:4px;
+  }
+
+  .date-vertical{
+    gap:26px;
+  }
+
+  .date-big{
+    font-size:clamp(66px, 8vw, 104px);
+    line-height:.92;
+  }
+
+  .date-big span{
+    display:block;
+    margin-bottom:4px;
+  }
+}
+
+/* Mobile: smoother date placement over photo */
+@media(max-width:900px){
+  .hero-date-mobile{
+    right:24px;
+    bottom:22px;
+    font-size:clamp(42px, 12vw, 58px);
+    line-height:.92;
+    gap:5px;
+  }
+
+  .hero-title{
+    animation:none;
+  }
+
+  .hero-title .over{
+    animation:heroTextIn 850ms ease-out 200ms both;
+  }
+
+  .hero-title h1{
+    animation:heroTextIn 1000ms ease-out 320ms both;
+  }
+}
+
+@keyframes heroPhotoIn{
+  from{
+    opacity:0;
+    transform:scale(1.035);
+    filter:grayscale(1) contrast(.9);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+    filter:grayscale(1);
+  }
+}
+
+@keyframes heroTextIn{
+  from{
+    opacity:0;
+    transform:translateX(-34px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+@keyframes heroDateIn{
+  from{
+    opacity:0;
+    transform:translateY(-34px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes desktopDateIn{
+  from{
+    opacity:0;
+    transform:translateY(-36px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(22px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@media(prefers-reduced-motion: reduce){
+  .hero-photo,
+  .hero-title .over,
+  .hero-title h1,
+  .hero-date-mobile,
+  .date-vertical,
+  .intro,
+  .music{
+    animation:none !important;
+  }
+}
+</style>
+
+<style id="v313-scroll-animations">
+/* v3.13+ — full page scroll animations */
+.reveal,
+.reveal-left,
+.reveal-right,
+.reveal-scale{
+  opacity:0;
+  transition-property:opacity, transform;
+  transition-duration:850ms;
+  transition-timing-function:cubic-bezier(.22,.61,.36,1);
+  will-change:opacity, transform;
+}
+
+.reveal{
+  transform:translateY(34px);
+}
+
+.reveal-left{
+  transform:translateX(-38px);
+}
+
+.reveal-right{
+  transform:translateX(38px);
+}
+
+.reveal-scale{
+  transform:scale(1.035);
+}
+
+.reveal.show,
+.reveal-left.show,
+.reveal-right.show{
+  opacity:1;
+  transform:translate(0,0);
+}
+
+.reveal-scale.show{
+  opacity:1;
+  transform:scale(1);
+}
+
+.delay-1{transition-delay:90ms;}
+.delay-2{transition-delay:170ms;}
+.delay-3{transition-delay:250ms;}
+.delay-4{transition-delay:330ms;}
+.delay-5{transition-delay:410ms;}
+.delay-6{transition-delay:490ms;}
+
+@media(max-width:900px){
+  .reveal-left,
+  .reveal-right{
+    transform:translateY(30px);
+  }
+  .reveal-left.show,
+  .reveal-right.show{
+    transform:translateY(0);
+  }
+
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale{
+    transition-duration:760ms;
+  }
+}
+
+@media(prefers-reduced-motion: reduce){
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale{
+    opacity:1 !important;
+    transform:none !important;
+    transition:none !important;
+  }
+}
+</style>
+
+
+<style id="hard-remove-extra-palette">
+.swatches,
+.sw,
+.s1,
+.s2,
+.s3,
+.s4,
+.s5,
+.s6,
+.s7{
+  display:none !important;
+}
+</style>
+
+
+<style id="place-photo-v6">
+.place-layout-single{
+  max-width:980px;
+  margin:0 auto;
+}
+.place-visual{
+  width:100%;
+  margin:0 auto 26px;
+  border:1px solid var(--line);
+  background:var(--paper);
+  padding:10px;
+}
+.place-photo{
+  display:block;
+  width:100%;
+  height:auto;
+  filter:grayscale(1);
+}
+@media(max-width:900px){
+  .place-visual{
+    padding:8px;
+    margin-bottom:18px;
+  }
+}
+</style>
+
+
+<style id="place-location-label-only">
+#place .section-head{
+  margin-bottom:26px;
+}
+#place .section-head .label{
+  margin-bottom:0;
+}
+</style>
+
+
+<style id="final-chat-cta-v8">
+.final-chat-cta{
+  margin-top:44px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+}
+.final-chat-text{
+  margin:0 !important;
+  font-size:18px !important;
+  color:var(--muted);
+}
+.final-chat-arrow{
+  font-size:34px;
+  line-height:1;
+  animation:finalArrowFloat 1.7s ease-in-out infinite;
+}
+.final-chat-cta .button{
+  margin-top:2px;
+}
+@keyframes finalArrowFloat{
+  0%,100%{ transform:translateY(0); opacity:.65; }
+  50%{ transform:translateY(8px); opacity:1; }
+}
+@media(max-width:600px){
+  .final-chat-cta{
+    margin-top:34px;
+  }
+  .final-chat-text{
+    font-size:16px !important;
+  }
+}
+@media(prefers-reduced-motion: reduce){
+  .final-chat-arrow{
+    animation:none;
+  }
+}
+</style>
+
+
+
+<style id="victoria-fixes-v9">
+@media(max-width:900px){
+  #save .section-head{
+    margin-bottom:22px;
+  }
+
+  #save .calendar-card{
+    display:block !important;
+  }
+
+  #save .calendar-count{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+  }
+
+  #save .countdown{
+    order:1;
+    margin-top:0;
+  }
+
+  #save .calendar-card{
+    order:2;
+  }
+
+  /* Dress-code text should be calmer/smaller on mobile */
+  #dress .lead{
+    font-size:18px !important;
+    line-height:1.5;
+    letter-spacing:0;
+  }
+}
+
+@media(min-width:901px){
+  /* Slightly reduce dress-code paragraph on desktop too */
+  #dress .lead{
+    font-size:22px !important;
+    line-height:1.45;
+  }
+}
+</style>
+
+
+<style id="mobile-timer-details-fix-v11">
+/* Mobile timer: no frame, centered and cleaner */
+@media(max-width:900px){
+  #save .countdown{
+    width:100%;
+    max-width:390px;
+    margin:0 auto 34px;
+    border:0 !important;
+    background:transparent !important;
+    display:grid;
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+    gap:0;
+  }
+
+  #save .count-row{
+    border:0 !important;
+    padding:0 4px;
+    text-align:center;
+  }
+
+  #save .count-num{
+    font-size:clamp(40px, 13vw, 58px);
+    line-height:.95;
+  }
+
+  #save .count-name{
+    margin-top:8px;
+    font-size:10px;
+    letter-spacing:.16em;
+  }
+
+  #save .calendar-card{
+    margin:0 auto;
+    max-width:390px;
+  }
+
+  /* Details: prevent the Д from touching/overlapping the bottom line */
+  .details .title{
+    line-height:1.08;
+    padding-bottom:10px;
+  }
+
+  .details .narrow.center{
+    margin-bottom:22px;
+  }
+
+  .detail-list{
+    margin-top:18px;
+  }
+}
+</style>
+
+
+<style id="vika-timer-move-v12">
+@media(max-width:900px){
+
+  /* stack calendar section properly */
+  #save .calendar-count{
+    display:flex;
+    flex-direction:column;
+  }
+
+  /* force order: heading -> countdown -> calendar */
+  #save .section-head{
+    order:0;
+  }
+
+  #save .countdown{
+    order:1;
+    margin-top:14px;
+  }
+
+  #save .calendar-card{
+    order:2;
+  }
+}
+</style>
+
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="mini-logo">A & V</div>
+      <nav>
+        <a href="#save">Дата</a>
+        <a href="#place">Место</a>
+        <a href="#program">Программа</a>
+        <a href="#dress">Dress code</a>
+        <a href="#rsvp">Анкета</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div class="hero-photo">
+          <div class="hero-title">
+            <div class="over">Wedding invitation</div>
+            <h1 class="serif">Алексей <span class="amp">&</span><br>Виктория</h1>
+          </div>
+          <div class="hero-date-mobile serif">
+            <span>23</span>
+            <span>08</span>
+            <span>26</span>
+          </div>
+        </div>
+
+        <aside class="hero-aside">
+          <div class="date-vertical">
+            <div class="vertical-word">Save the date</div>
+            <div class="date-big serif">
+              <span>23</span>
+              <span>08</span>
+              <span>26</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="intro">
+              С большой радостью приглашаем вас на наш первый семейный праздник — нашу свадьбу. Мы очень хотим, чтобы в этот день с нами рядом были самые близкие люди.
+            </div>
+
+            <div class="music">
+              <div>
+                Перед прочтением, пожалуйста, включите музыку для атмосферы.
+                <small>music for the mood</small>
+              </div>
+              <button class="play" id="playBtn" type="button" aria-label="Включить музыку">▶</button>
+              <audio id="music" src="music.mp3" preload="none"></audio>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="save">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="label">Calendar</div>
+            <h2 class="title serif">До свадьбы осталось</h2>
+          </div>
+          
+        </div>
+
+        <div class="calendar-count">
+          <div class="calendar-card">
+            <div class="cal-top">
+              <span>Алексей & Виктория</span>
+              <span>2026</span>
+            </div>
+            <div class="cal-month serif">Август</div>
+            <div class="week">
+              <div>Пн</div><div>Вт</div><div>Ср</div><div>Чт</div><div>Пт</div><div>Сб</div><div>Вс</div>
+            </div>
+            <div class="days">
+              <div class="day empty">0</div><div class="day empty">0</div><div class="day empty">0</div><div class="day empty">0</div><div class="day empty">0</div><div class="day">1</div><div class="day">2</div>
+              <div class="day">3</div><div class="day">4</div><div class="day">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div>
+              <div class="day">10</div><div class="day">11</div><div class="day">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div><div class="day">16</div>
+              <div class="day">17</div><div class="day">18</div><div class="day">19</div><div class="day">20</div><div class="day">21</div><div class="day">22</div><div class="day heart">23</div>
+              <div class="day">24</div><div class="day">25</div><div class="day">26</div><div class="day">27</div><div class="day">28</div><div class="day">29</div><div class="day">30</div>
+              <div class="day">31</div><div class="day empty">0</div><div class="day empty">0</div><div class="day empty">0</div><div class="day empty">0</div><div class="day empty">0</div><div class="day empty">0</div>
+            </div>
+          </div>
+
+          <div class="countdown">
+            <div class="count-row"><div class="count-num serif" id="daysLeft">0</div>
+<p class="muted" style="max-width:360px">Мы будем признательны, если вы подтвердите присутствие до 15 июля 2026 года.</p><div class="count-name">Дни</div></div>
+            <div class="count-row"><div class="count-num serif" id="hoursLeft">0</div><div class="count-name">Часы</div></div>
+            <div class="count-row"><div class="count-num serif" id="minutesLeft">0</div><div class="count-name">Минуты</div></div>
+            <div class="count-row"><div class="count-num serif" id="secondsLeft">0</div><div class="count-name">Секунды</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="place" id="place">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="label">Location</div>
+            
+          </div>
+        </div>
+
+        <div class="place-layout place-layout-single">
+          <div class="place-visual reveal-scale">
+            <img class="place-photo" src="venue-photo.png" alt="Пушкинская усадьба">
+          </div>
+          <div class="place-card place-card-single">
+            <div>
+              <p class="lead serif" style="margin-top:0">Загородный комплекс<br>«Пушкинская усадьба»</p>
+              <p class="muted">Ленинградская область, Тосненский район, Фёдоровское городское поселение, городской посёлок Фёдоровское, Зелёная улица, 1</p>
+            </div>
+            <p>
+              <a class="button" target="_blank" rel="noopener" href="https://yandex.ru/maps/-/CTEpNKY2">Перейти к карте</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="program">
+      <div class="wrap program-grid">
+        <div>
+          <div class="small-photo short" style='background:#aaa url("program-photo.jpg") center center/cover no-repeat; filter:grayscale(1);'></div>
+          <div class="caption-line">Program</div>
+        </div>
+
+        <div>
+          <div class="section-head">
+            <div>
+              <div class="label">Timing</div>
+              <h2 class="title serif">Программа торжества</h2>
+            </div>
+          </div>
+
+          <div class="program-list">
+            <div class="event">
+              <div class="event-time serif">16:00</div>
+              <div><h3>Сбор гостей</h3><p class="muted">Встреча, welcome и первые фотографии.</p></div>
+            </div>
+            <div class="event">
+              <div class="event-time serif">16:30</div>
+              <div><h3>Церемония регистрации</h3><p class="muted">Разрешается трогательно всплакнуть!</p></div>
+            </div>
+            <div class="event">
+              <div class="event-time serif">17:00</div>
+              <div><h3>Праздничный банкет</h3><p class="muted">Время вкусной еды, поздравлений, музыки и танцев.</p></div>
+            </div>
+            <div class="event">
+              <div class="event-time serif">23:00</div>
+              <div><h3>Завершение вечера</h3><p class="muted">Даже самые радостные события заканчиваются.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dress" id="dress">
+      <div class="wrap dress-layout dress-layout-no-photo">
+        <div class="dress-vertical serif">Dress<br>code</div>
+
+        <div>
+          <div class="label">Colors</div>
+          <h2 class="title serif" style="font-size:clamp(38px,5vw,70px)">Цветовая гамма</h2>
+          <p class="lead" style="font-size:26px">Для нас главное — ваше присутствие. Но мы будем рады, если в своих нарядах вы поддержите цветовую гамму нашей свадьбы.</p></div>
+        </div>
+      </div>
+
+      <div class="wrap" style="margin-top:48px">
+        <img class="palette-img" src="palette.jpg" alt="Палитра дресс-кода">
+      </div>
+    </section>
+
+    
+
+
+
+<section class="details" id="details">
+      <div class="narrow center">
+        <div class="label">Important details</div>
+        <h2 class="title serif">Детали</h2>
+      </div>
+
+      <div class="detail-list">
+        <div class="detail-item">
+          <div class="detail-num serif">01</div>
+          <div>
+            <div class="detail-title serif">Формат нашего вечера</div>
+            <p class="muted">Мы решили пригласить все семейные пары без детей, чтобы у вас была возможность расслабиться и ни о чём не думать. Надеемся, что вы сможете оставить своих деток с кем-то из родственников и всецело погрузиться в атмосферу нашего праздника. Заранее благодарим за понимание и поддержку.</p>
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-num serif">02</div>
+          <div>
+            <div class="detail-title serif">Вместо цветов</div>
+            <p class="muted">Приятным комплиментом для нас будет, если вместо цветов вы решите подарить нам бутылочку вашего любимого алкоголя для нашей семейной коллекции.</p>
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-num serif">03</div>
+          <div>
+            <div class="detail-title serif">Чат гостей</div>
+            <p class="muted">По всем вопросам по поводу торжества можно написать в чат гостей.</p>
+          </div>
+        </div>
+
+
+        <div class="detail-item">
+          <div class="detail-num serif">04</div>
+          <div>
+            <div class="detail-title serif">Парковка</div>
+            <p class="muted">На территории комплекса предусмотрена парковка для личного транспорта.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section class="rsvp" id="rsvp">
+      <div class="wrap">
+        <div class="form-shell">
+          <div class="label">RSVP</div>
+          <h2 class="title serif">Анкета гостя</h2>
+          <p class="lead muted" style="font-size:26px">Будем признательны, если вы сообщите нам о своём присутствии до 15 июля 2026 года.</p>
+
+          <form id="guestForm" class="form-grid">
+            <div>
+              <label for="name">Ваше имя и фамилия</label>
+              <input id="name" name="Имя и фамилия" type="text" required placeholder="Иван Иванов">
+            </div>
+
+            <div>
+              <label for="presence">Планируете ли Вы присутствовать?</label>
+              <select id="presence" name="Присутствие" required>
+                <option value="">Выберите вариант</option>
+                <option>Да, с удовольствием</option>
+                <option>К сожалению, не смогу</option>
+                <option>Пока не знаю</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="hot">Какое горячее Вы выбираете?</label>
+              <select id="hot" name="Горячее">
+                <option value="">Выберите вариант</option>
+                <option>Корейка свиная</option>
+                <option>Судак</option>
+                <option>Не требуется</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="transfer">Понадобится ли трансфер?</label>
+              <input id="transfer" name="Трансфер" type="text" placeholder="Туда / обратно / туда и обратно / не нужен">
+            </div>
+
+            <div class="full">
+              <label>Какие алкогольные напитки Вы предпочитаете?</label>
+              <div class="checks">
+                <label class="check"><input type="checkbox" name="Алкоголь" value="Шампанское"> Шампанское</label>
+                <label class="check"><input type="checkbox" name="Алкоголь" value="Вино белое полусухое"> Вино белое полусухое</label>
+                <label class="check"><input type="checkbox" name="Алкоголь" value="Вино белое полусладкое"> Вино белое полусладкое</label>
+                <label class="check"><input type="checkbox" name="Алкоголь" value="Вино красное полусухое"> Вино красное полусухое</label>
+                <label class="check"><input type="checkbox" name="Алкоголь" value="Вино красное полусладкое"> Вино красное полусладкое</label>
+                <label class="check"><input type="checkbox" name="Алкоголь" value="Ром"> Ром</label>
+                <label class="check"><input type="checkbox" name="Алкоголь" value="Виски"> Виски</label>
+                <label class="check"><input type="checkbox" name="Алкоголь" value="Водка"> Водка</label>
+                <label class="check"><input type="checkbox" name="Алкоголь" value="Без алкоголя"> Без алкоголя</label>
+              </div>
+            </div>
+
+            <div class="full">
+              <label for="food">Есть ли аллергии или особенности питания?</label>
+              <textarea id="food" name="Аллергии и питание" placeholder="Напишите, что нам важно учесть"></textarea>
+            </div>
+
+            <div class="full">
+              <label for="comment">Комментарий</label>
+              <textarea id="comment" name="Комментарий" placeholder="Любые пожелания или уточнения"></textarea>
+            </div>
+
+            <div class="full">
+              <button class="submit" type="submit">Отправить</button>
+              <div class="ok" id="ok"></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+<section class="final">
+      <div class="wrap">
+        <div class="monogram serif">A & V</div>
+        <p>Будем счастливы видеть вас рядом в этот особенный день.</p>
+        <p class="muted">23 августа 2026</p>
+
+        <div class="final-chat-cta">
+          <p class="final-chat-text">По всем возникшим вопросам пишите сюда</p>
+          <div class="final-chat-arrow">↓</div>
+          <a class="button" href="https://t.me/your_chat_link" target="_blank" rel="noopener">Перейти в чат для гостей</a>
+        </div>
+      </div>
+    </section>
+
+</main>
+
+  <script>
+    const weddingDate = new Date("2026-08-23T16:00:00+03:00");
+
+    function updateCountdown(){
+      const now = new Date();
+      const diff = Math.max(0, weddingDate - now);
+      const d = Math.floor(diff / (1000*60*60*24));
+      const h = Math.floor(diff / (1000*60*60)) % 24;
+      const m = Math.floor(diff / (1000*60)) % 60;
+      const s = Math.floor(diff / 1000) % 60;
+
+      document.getElementById("daysLeft").textContent = d;
+      document.getElementById("hoursLeft").textContent = h;
+      document.getElementById("minutesLeft").textContent = m;
+      document.getElementById("secondsLeft").textContent = s;
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    const audio = document.getElementById("music");
+    const playBtn = document.getElementById("playBtn");
+    playBtn.addEventListener("click", async () => {
+      try{
+        if(audio.paused){
+          await audio.play();
+          playBtn.textContent = "Ⅱ";
+        } else {
+          audio.pause();
+          playBtn.textContent = "▶";
+        }
+      }catch(e){
+        alert("Положите файл music.mp3 рядом с index.html, чтобы включить музыку.");
+      }
+    });
+
+    /*
+      Следующий этап:
+      сюда можно подключить отправку в Telegram через serverless-функцию.
+      Пока форма работает в тестовом режиме.
+    */
+    const FORM_ENDPOINT = "";
+
+    document.getElementById("guestForm").addEventListener("submit", async function(e){
+      e.preventDefault();
+
+      const fd = new FormData(this);
+      const alcohol = Array.from(this.querySelectorAll('input[name="Алкоголь"]:checked')).map(x => x.value);
+      fd.delete("Алкоголь");
+      fd.append("Алкоголь", alcohol.join(", "));
+
+      const payload = Object.fromEntries(fd.entries());
+      payload["Дата отправки"] = new Date().toLocaleString("ru-RU");
+
+      const ok = document.getElementById("ok");
+
+      if(!FORM_ENDPOINT){
+        console.log("Ответ гостя:", payload);
+        ok.style.display = "block";
+        ok.textContent = "Тестовый режим: ответ показан в консоли браузера. На следующем этапе подключим отправку в Telegram.";
+        this.reset();
+        return;
+      }
+
+      try{
+        await fetch(FORM_ENDPOINT, {
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify(payload)
+        });
+        ok.style.display = "block";
+        ok.textContent = "Спасибо! Ваш ответ отправлен.";
+        this.reset();
+      }catch(err){
+        ok.style.display = "block";
+        ok.textContent = "Не получилось отправить анкету. Пожалуйста, напишите нам в чат гостей.";
+      }
+    });
+  </script>
+
+<script id="v313-scroll-animation-script">
+(function(){
+  const add = (selector, cls, delayStep = false) => {
+    document.querySelectorAll(selector).forEach((el, index) => {
+      if (!el.classList.contains("reveal") &&
+          !el.classList.contains("reveal-left") &&
+          !el.classList.contains("reveal-right") &&
+          !el.classList.contains("reveal-scale")) {
+        el.classList.add(cls);
+      }
+      if (delayStep) {
+        el.classList.add("delay-" + Math.min(index + 1, 6));
+      }
+    });
+  };
+
+  add("section:not(.hero) .label", "reveal");
+  add("section:not(.hero) .title", "reveal", true);
+  add("section:not(.hero) .lead", "reveal", true);
+
+  add(".calendar-card", "reveal-left");
+  add(".countdown", "reveal-right");
+
+  add(".place-card", "reveal");
+
+  add("#program .small-photo", "reveal-scale");
+  add(".event", "reveal", true);
+
+  add(".dress-vertical", "reveal-left");
+  add(".palette-img", "reveal-scale");
+
+  add(".form-shell", "reveal");
+  add(".form-grid > div", "reveal", true);
+
+  add(".detail-item", "reveal", true);
+  add(".chat-cta", "reveal");
+
+  add(".monogram", "reveal-scale");
+  add(".final p", "reveal", true);
+  add(".final-chat-cta", "reveal");
+
+  const targets = document.querySelectorAll(".reveal, .reveal-left, .reveal-right, .reveal-scale");
+
+  if (!("IntersectionObserver" in window)) {
+    targets.forEach(el => el.classList.add("show"));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.14,
+    rootMargin: "0px 0px -8% 0px"
+  });
+
+  targets.forEach(el => observer.observe(el));
+})();
+</script>
+
+
+<div class="music-player">
+  <audio id="bg-music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <button class="music-btn" id="playBtn">▶</button>
+  <button class="music-btn" id="pauseBtn">❚❚</button>
+  <button class="music-btn" id="stopBtn">■</button>
+</div>
+
+<style>
+.music-player{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  display:flex;
+  gap:10px;
+  z-index:9999;
+}
+.music-btn{
+  width:52px;height:52px;border-radius:50%;
+  border:1px solid rgba(0,0,0,.2);
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  -webkit-appearance:none;
+  appearance:none;
+  transition:.2s;
+  font-size:18px;
+}
+.music-btn:hover{transform:scale(1.08);}
+.music-btn:active{transform:scale(.92);}
+.playing{
+  box-shadow:0 0 20px rgba(0,0,0,.15);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const audio=document.getElementById('bg-music');
+  const play=document.getElementById('playBtn');
+  const pause=document.getElementById('pauseBtn');
+  const stop=document.getElementById('stopBtn');
+  if(!audio||!play||!pause||!stop)return;
+
+  play.addEventListener('click',()=>audio.play());
+  pause.addEventListener('click',()=>audio.pause());
+  stop.addEventListener('click',()=>{audio.pause();audio.currentTime=0;});
+});
+</script>
+
+</body>
+</html>
