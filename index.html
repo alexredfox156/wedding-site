@@ -1655,34 +1655,6 @@ async function sendToTelegram(payload) {
     throw new Error("Worker send failed");
   }
 }
-  const text =
-`💍 Новая анкета гостя
-
-👤 Имя и фамилия: ${payload.name || "-"}
-📌 Присутствие: ${payload.presence || "-"}
-🍽 Горячее: ${payload.hot || "-"}
-🚌 Трансфер: ${payload.transfer || "-"}
-🍷 Алкоголь: ${payload.alcohol || "-"}
-🥗 Аллергии / питание: ${payload.food || "-"}
-💬 Комментарий: ${payload.comment || "-"}
-
-🕒 Отправлено: ${new Date().toLocaleString("ru-RU")}`;
-
-  const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      chat_id: CHAT_ID,
-      text: text
-    })
-  });
-
-  if (!response.ok) {
-    throw new Error("Telegram send failed");
-  }
-}
 
 const guestForm = document.getElementById("guestForm");
 
@@ -1731,7 +1703,7 @@ if (guestForm) {
       this.reset();
 
     } catch (error) {
-      console.log("Telegram error:", error);
+      console.log("Worker error:", error);
 
       if (ok) {
         ok.style.display = "block";
