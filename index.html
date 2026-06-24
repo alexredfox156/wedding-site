@@ -1638,10 +1638,23 @@ setInterval(updateCountdown, 1000);
 
 
 <script id="telegram-rsvp-form-handler">
-const BOT_TOKEN = "8862098336:AAHFumPtDPmjPSlkqnU8MgTsds3VbBjut48";
-const CHAT_ID = "-1004339998255";
+const FORM_ENDPOINT = "https://wedding-rsvp.alexredfox156.workers.dev";
 
 async function sendToTelegram(payload) {
+  payload.sentAt = new Date().toLocaleString("ru-RU");
+
+  const response = await fetch(FORM_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!response.ok) {
+    throw new Error("Worker send failed");
+  }
+}
   const text =
 `💍 Новая анкета гостя
 
