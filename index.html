@@ -1640,7 +1640,7 @@ setInterval(updateCountdown, 1000);
 <script id="telegram-rsvp-form-handler">
 (function () {
   const FORM_ENDPOINT = "https://wedding-rsvp.alexredfox156.workers.dev";
-
+  let isSubmitting = false;
   async function sendToTelegram(payload) {
     payload.sentAt = new Date().toLocaleString("ru-RU");
 
@@ -1670,6 +1670,9 @@ setInterval(updateCountdown, 1000);
     guestForm.addEventListener("submit", async function (e) {
       e.preventDefault();
       e.stopPropagation();
+
+      if (isSubmitting) return false;
+      isSubmitting = true;
 
       const submitButton = this.querySelector(".submit, button[type='submit'], input[type='submit']");
       const ok = document.getElementById("ok");
@@ -1720,6 +1723,8 @@ setInterval(updateCountdown, 1000);
         }
 
       } finally {
+        isSubmitting = false;
+        
         if (submitButton) {
           submitButton.disabled = false;
           submitButton.textContent = "Отправить";
