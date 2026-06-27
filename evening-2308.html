@@ -41,9 +41,47 @@
     @media(max-width:900px){.topbar nav{display:none}.hero-grid,.gallery-grid,.form-grid{grid-template-columns:1fr}.hero-photo{height:64vh;min-height:430px}.hero-aside{min-height:auto;gap:34px;padding-top:20px}.date-vertical{display:none}.section-head{display:block}.form-shell{padding:26px}.full{grid-column:auto}.detail-item{grid-template-columns:62px 1fr}.detail-num{font-size:42px}.photo-card img{height:390px}section{padding:72px 0}.reveal-left,.reveal-right{transform:translateY(30px)}.reveal-left.show,.reveal-right.show{transform:translateY(0)}}
     @media(max-width:520px){.hero{padding-top:74px}h1{font-size:56px}.lead{font-size:22px}.photo-card img{height:320px}}
     @media(prefers-reduced-motion:reduce){.hero-photo,.date-vertical,.intro,.reveal,.reveal-left,.reveal-right,.reveal-scale{opacity:1!important;transform:none!important;transition:none!important;animation:none!important}}
+
+    .music-toggle{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:80;
+      min-height:46px;
+      padding:0 18px;
+      border:1px solid rgba(247,243,238,.78);
+      border-radius:999px;
+      background:rgba(21,21,21,.78);
+      color:#f7f3ee;
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      font:inherit;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      cursor:pointer;
+      box-shadow:0 10px 30px rgba(0,0,0,.22);
+    }
+    .music-toggle:hover{
+      background:rgba(21,21,21,.92);
+    }
+    @media(max-width:520px){
+      .music-toggle{
+        right:14px;
+        bottom:14px;
+        min-height:44px;
+        padding:0 14px;
+        font-size:10px;
+        letter-spacing:.1em;
+      }
+    }
+
   </style>
 </head>
 <body>
+  <audio id="eveningMusic" src="evening-music.mp3" preload="auto" loop></audio>
+  <button class="music-toggle" id="musicToggle" type="button">▶ включить настроение</button>
+
   <header class="topbar"><div class="topbar-inner"><div class="mini-logo">A & V</div><nav><a href="#about">О вечере</a><a href="#place">Место</a><a href="#info">Информация</a><a href="#answer">Ответить</a></nav></div></header>
   <main>
     <section class="hero" id="top"><div class="wrap hero-grid"><div class="hero-photo"><div class="hero-title"><div class="over">After wedding</div><h1 class="serif">Продолжение<br>вечера</h1></div></div><aside class="hero-aside"><div class="date-vertical"><div class="vertical-word">Alexey & Victoria</div><div class="date-big serif"><span>23</span><span>08</span><span>26</span></div></div><div class="intro"><p>После основного праздника у нас будет возможность остаться на территории усадьбы и ещё немного продлить этот день в более камерной компании.</p><p>Будем рады, если вы сможете провести с нами ещё немного времени и разделить это продолжение вечера.</p><p>Нам нужно только заранее понять, кто планирует остаться, чтобы всё спокойно организовать.</p></div></aside></div></section>
@@ -64,12 +102,51 @@
       </div>
     </section>
 
-    <section class="rsvp" id="answer"><div class="wrap"><div class="form-shell"><div class="label">Answer</div><h2 class="title serif">Ответ по вечеру</h2><p class="lead muted" style="font-size:26px">Пожалуйста, оставьте короткий ответ — это поможет нам заранее всё спокойно организовать.</p><form id="eveningForm" class="form-grid"><div><label for="name">Как тебя записать?</label><input id="name" name="name" type="text" required placeholder="Например: Ричард"></div><div><label for="presence">Готов(а) остаться?</label><select id="presence" name="presence" required><option value="">Выберите вариант</option><option>Да, хочу остаться</option><option>Пока не уверен(а)</option><option>Не получится</option></select></div><div class="full"><label for="comment">Комментарий, если нужно</label><textarea id="comment" name="comment" placeholder="Можно написать любое уточнение"></textarea></div><div class="full"><button class="submit" type="submit">Отправить</button><div class="ok" id="ok"></div></div></form></div></div></section>
+    <section class="rsvp" id="answer"><div class="wrap"><div class="form-shell"><div class="label">Answer</div><h2 class="title serif">Ответ по вечеру</h2><p class="lead muted" style="font-size:26px">Пожалуйста, оставьте короткий ответ — это поможет нам заранее всё спокойно организовать.</p><form id="eveningForm" class="form-grid"><div><label for="name">Как тебя записать?</label><input id="name" name="name" type="text" required placeholder="Например: Настя"></div><div><label for="presence">Готов(а) остаться?</label><select id="presence" name="presence" required><option value="">Выберите вариант</option><option>Да, хочу остаться</option><option>Пока не уверен(а)</option><option>Не получится</option></select></div><div class="full"><label for="comment">Комментарий, если нужно</label><textarea id="comment" name="comment" placeholder="Можно написать любое уточнение"></textarea></div><div class="full"><button class="submit" type="submit">Отправить</button><div class="ok" id="ok"></div></div></form></div></div></section>
     <section class="final"><div class="wrap"><div class="monogram serif">A & V</div><p>Спасибо, что помогаете нам всё спокойно организовать.</p><p class="muted">23 августа 2026</p></div></section>
   </main>
   <script id="telegram-evening-form-handler">
   (function(){const FORM_ENDPOINT="https://wedding-rsvp.alexredfox156.workers.dev";function getValue(id){const el=document.getElementById(id);return el&&typeof el.value==="string"?el.value.trim():""}async function sendToTelegram(payload){payload.sentAt=new Date().toLocaleString("ru-RU");const response=await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});if(!response.ok){const errorText=await response.text().catch(()=>"");throw new Error("Worker send failed: "+errorText)}}const form=document.getElementById("eveningForm");if(!form)return;form.addEventListener("submit",async function(e){e.preventDefault();e.stopPropagation();const submitButton=this.querySelector(".submit");const ok=document.getElementById("ok");const name=getValue("name");const presence=getValue("presence");const comment=getValue("comment");if(!name){if(ok){ok.style.display="block";ok.textContent="Пожалуйста, напишите, как вас записать."}return false}if(!presence){if(ok){ok.style.display="block";ok.textContent="Пожалуйста, выберите вариант ответа."}return false}const payload={name:name,presence:presence,hot:"🏡 Продолжение вечера / коттедж",transfer:"Отдельная страница: evening-2308.html",alcohol:"-",food:"-",comment:comment||"-"};try{if(submitButton){submitButton.disabled=true;submitButton.textContent="Отправляем..."}await sendToTelegram(payload);if(ok){ok.style.display="block";ok.textContent="Спасибо! Ответ по продолжению вечера отправлен."}this.reset()}catch(error){console.log("Worker error:",error);if(ok){ok.style.display="block";ok.textContent="Не получилось отправить ответ. Пожалуйста, попробуйте ещё раз или напишите нам в чат."}}finally{if(submitButton){submitButton.disabled=false;submitButton.textContent="Отправить"}}return false})})();
   </script>
+
+  <script id="evening-music-script">
+  (function(){
+    const audio = document.getElementById("eveningMusic");
+    const button = document.getElementById("musicToggle");
+    if (!audio || !button) return;
+
+    audio.volume = 0.55;
+
+    let isPlaying = false;
+
+    function setButton() {
+      button.textContent = isPlaying ? "⏸ выключить" : "▶ включить настроение";
+    }
+
+    button.addEventListener("click", async function(){
+      try {
+        if (audio.paused) {
+          await audio.play();
+          isPlaying = true;
+        } else {
+          audio.pause();
+          isPlaying = false;
+        }
+        setButton();
+      } catch (error) {
+        console.log("Music play error:", error);
+        isPlaying = false;
+        setButton();
+      }
+    });
+
+    audio.addEventListener("ended", function(){
+      isPlaying = false;
+      setButton();
+    });
+  })();
+  </script>
+
   <script id="scroll-animation-script">
   (function(){const add=(selector,cls,delayStep=false)=>{document.querySelectorAll(selector).forEach((el,index)=>{if(!el.classList.contains("reveal")&&!el.classList.contains("reveal-left")&&!el.classList.contains("reveal-right")&&!el.classList.contains("reveal-scale")){el.classList.add(cls)}if(delayStep){el.classList.add("delay-"+Math.min(index+1,3))}})};add("section:not(.hero) .label","reveal");add("section:not(.hero) .title","reveal",true);add("section:not(.hero) .lead","reveal",true);add(".detail-item","reveal",true);add(".form-shell","reveal");add(".form-grid > div","reveal",true);add(".monogram","reveal-scale");add(".final p","reveal",true);const targets=document.querySelectorAll(".reveal,.reveal-left,.reveal-right,.reveal-scale");if(!("IntersectionObserver" in window)){targets.forEach(el=>el.classList.add("show"));return}const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("show");observer.unobserve(entry.target)}})},{threshold:.14,rootMargin:"0px 0px -8% 0px"});targets.forEach(el=>observer.observe(el))})();
   </script>
