@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Только для Вики</title>
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --card: #fffdf9;
+      --text: #111111;
+      --muted: #6d6a65;
+      --line: #d8d1c8;
+      --soft: #eee8df;
+      --error: #8f2f2f;
+      --ok: #1f5b3a;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, 'Times New Roman', serif;
+      background: radial-gradient(circle at top, #fffaf2 0, var(--bg) 46%, #eee7dc 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 18px;
+      border: 1px solid rgba(17, 17, 17, 0.18);
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .page {
+      width: min(980px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 72px 0;
+    }
+
+    .access-card {
+      width: min(560px, 100%);
+      background: rgba(255, 253, 249, 0.88);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 52px 44px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 78px);
+      line-height: 0.95;
+      margin-bottom: 26px;
+    }
+
+    h2 {
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1;
+      margin-bottom: 22px;
+    }
+
+    h3 {
+      font-size: clamp(24px, 4vw, 38px);
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .lead {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .access-form {
+      margin-top: 34px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .code-input {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: var(--text);
+      padding: 16px 18px;
+      text-align: center;
+      font-size: 21px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      outline: none;
+    }
+
+    .code-input:focus {
+      border-color: #111111;
+    }
+
+    .btn {
+      border: 1px solid #111111;
+      background: #111111;
+      color: #ffffff;
+      padding: 16px 22px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background: #ffffff;
+      color: #111111;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: #111111;
+    }
+
+    .btn.secondary:hover {
+      background: #111111;
+      color: #ffffff;
+    }
+
+    .message {
+      min-height: 26px;
+      margin-top: 18px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .message.error {
+      color: var(--error);
+    }
+
+    .message.ok {
+      color: var(--ok);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .content {
+      padding: 90px 0 110px;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section {
+      padding: 78px 0;
+      border-bottom: 1px solid rgba(17, 17, 17, 0.13);
+    }
+
+    .section.center {
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(255, 253, 249, 0.78);
+      border: 1px solid var(--line);
+      padding: 44px;
+      box-shadow: var(--shadow);
+    }
+
+    .yarik-card {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .photo-placeholder {
+      border: 1px solid #111111;
+      background: #ffffff;
+      min-height: 138px;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      text-align: center;
+      color: var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      line-height: 1.5;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .photo-placeholder.featured {
+      min-height: 210px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(42px, 9vw, 92px);
+      letter-spacing: -0.08em;
+      text-transform: none;
+      color: var(--text);
+    }
+
+    .intro-card {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 40px;
+      align-items: center;
+      text-align: left;
+    }
+
+    .intro-copy .lead {
+      margin: 0;
+      max-width: none;
+    }
+
+    .intro-photo {
+      min-height: 300px;
+      height: 100%;
+    }
+
+    .quiz-wrap {
+      max-width: 760px;
+      margin: 36px auto 0;
+    }
+
+    .quiz-progress {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .question-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 34px;
+      text-align: left;
+      box-shadow: var(--shadow);
+    }
+
+    .question-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .question-main {
+      min-width: 0;
+    }
+
+    .question-media {
+      margin: 0;
+    }
+
+    .question-photo-placeholder {
+      width: 100%;
+      min-height: 100%;
+      height: 100%;
+      border: 1px solid #111111;
+      background: #ffffff;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      text-align: center;
+      color: var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      line-height: 1.5;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .question-title {
+      font-size: clamp(25px, 4vw, 36px);
+      color: var(--text);
+      line-height: 1.18;
+      margin-bottom: 28px;
+    }
+
+    .answers {
+      display: grid;
+      gap: 12px;
+    }
+
+    .answer-btn {
+      width: 100%;
+      text-align: left;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: var(--text);
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: border 0.2s ease, transform 0.2s ease, background 0.2s ease;
+    }
+
+    .answer-btn:hover {
+      border-color: #111111;
+      transform: translateY(-1px);
+      background: var(--soft);
+    }
+
+    .quiz-note {
+      margin-top: 18px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      color: var(--error);
+      min-height: 22px;
+    }
+
+    .final-gate {
+      margin-top: 32px;
+      text-align: center;
+    }
+
+    .video-box {
+      max-width: 760px;
+      margin: 34px auto 0;
+      background: #111111;
+      color: #ffffff;
+      border: 1px solid #111111;
+      aspect-ratio: 16 / 9;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 28px;
+    }
+
+    .video-box p {
+      color: rgba(255,255,255,0.78);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    video {
+      width: 100%;
+      display: block;
+      background: #111111;
+    }
+
+    .signature {
+      margin-top: 34px;
+      color: var(--text);
+      font-size: 24px;
+      line-height: 1.55;
+    }
+
+    @media (max-width: 720px) {
+      body::before {
+        inset: 10px;
+      }
+
+      .page {
+        width: min(100% - 24px, 980px);
+      }
+
+      .screen {
+        padding: 46px 0;
+      }
+
+      .access-card,
+      .card,
+      .question-card {
+        padding: 30px 22px;
+      }
+
+      p {
+        font-size: 17px;
+      }
+
+      .section {
+        padding: 56px 0;
+      }
+
+      .yarik-card,
+      .intro-card,
+      .question-layout {
+        grid-template-columns: 1fr;
+        gap: 26px;
+      }
+
+      .photo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-placeholder,
+      .photo-placeholder.featured {
+        min-height: 150px;
+      }
+
+      .photo-placeholder.featured {
+        font-size: 68px;
+      }
+
+      .intro-photo,
+      .question-photo-placeholder {
+        min-height: 170px;
+      }
+
+      .code-input {
+        font-size: 19px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="screen" id="accessScreen">
+      <div class="page">
+        <div class="access-card">
+          <p class="eyebrow">Only Vika</p>
+          <h1>Richard<br>на посту</h1>
+          <p class="lead">Эта страница открывается не всем.<br>Если ты дошла до финального места, введи кодовую фразу.</p>
+
+          <form class="access-form" id="accessForm">
+            <input class="code-input" id="codeInput" type="text" placeholder="Кодовая фраза" autocomplete="off" />
+            <button class="btn" type="submit">Открыть</button>
+          </form>
+
+          <div class="message" id="accessMessage"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content hidden" id="mainContent">
+      <div class="page">
+        <section class="section">
+          <div class="card intro-card">
+            <!-- Заглушка под фото для первого открытого блока -->
+            <div class="photo-placeholder intro-photo">Фото для блока «Проверка пройдена»</div>
+            <div class="intro-copy">
+              <p class="eyebrow">Проверка пройдена</p>
+              <h2>Викуля, это только для тебя</h2>
+              <p class="lead">Если ты это читаешь, значит, ты прошла маленький домашний путь и добралась до нужного места.<br>Не будем делать вид, что Richard всё организовал сам, но проверял он точно внимательно.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="card yarik-card">
+            <!--
+              Заглушки под фото в блоке про Ярославль.
+              Позже можно заменить каждый .photo-placeholder на <img src="..." alt="...">.
+            -->
+            <div class="photo-grid">
+              <div class="photo-placeholder featured">Я</div>
+              <div class="photo-placeholder">Фото из Ярославля / момент 1</div>
+              <div class="photo-placeholder">Фото из Ярославля / момент 2</div>
+            </div>
+            <div>
+              <p class="eyebrow">Кодовая фраза</p>
+              <h2>Ярик</h2>
+              <p>Есть города, которые становятся частью человека.<br>Для тебя таким местом стал Ярославль — твой Ярик.<br>Город юности, воспоминаний, людей, дорог и моментов, которые навсегда остаются внутри, Викусь.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section center" id="quizSection">
+          <p class="eyebrow">Richard проверяет</p>
+          <h2>Небольшая проверка</h2>
+          <p class="lead">Перед финалом Richard должен убедиться, что это точно Викуля.<br>Всего четыре вопроса — и он отойдёт в сторону.</p>
+
+          <div class="quiz-wrap">
+            <div class="quiz-progress" id="quizProgress"></div>
+            <div class="question-card">
+              <div class="question-layout">
+                <div class="question-main">
+                  <div class="question-title" id="questionTitle"></div>
+                  <div class="answers" id="answers"></div>
+                  <div class="quiz-note" id="quizNote"></div>
+                </div>
+                <!-- Заглушка под фото для каждого вопроса викторины -->
+                <div class="question-media">
+                  <div class="question-photo-placeholder" id="questionPhoto"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="final-gate hidden" id="finalGate">
+            <h3>Проверка пройдена</h3>
+            <p class="lead">Richard подтверждает: это точно наша Вика.<br>Дальше он отходит в сторону, потому что кое-что Лёша хочет сказать сам.</p>
+            <br>
+            <button class="btn secondary" id="openFinal" type="button">Открыть поздравление</button>
+          </div>
+        </section>
+
+        <section class="section center hidden" id="videoSection">
+          <p class="eyebrow">Финал</p>
+          <h2>Викуся</h2>
+          <p class="lead">Я мог бы написать много красивых слов, но в этот раз хочу сказать это сам.<br>Нажми play.</p>
+
+          <!--
+            Когда видео будет готово:
+            1. положи файл рядом с only-vika.html, например: vika-birthday.mp4
+            2. замени блок .video-box ниже на этот код:
+
+            <video controls playsinline poster="poster.jpg">
+              <source src="vika-birthday.mp4" type="video/mp4" />
+              Твой браузер не поддерживает видео.
+            </video>
+          -->
+          <div class="video-box">
+            <p>Здесь будет видео-поздравление.<br>Файл можно будет заменить на реальное видео перед публикацией.</p>
+          </div>
+
+          <p class="signature">С днём рождения, родная.<br>Люблю тебя безумно.<br>Твой Лёшик.</p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const SECRET_CODE = 'ЯРИК';
+
+    const accessForm = document.getElementById('accessForm');
+    const codeInput = document.getElementById('codeInput');
+    const accessMessage = document.getElementById('accessMessage');
+    const accessScreen = document.getElementById('accessScreen');
+    const mainContent = document.getElementById('mainContent');
+
+    const quizProgress = document.getElementById('quizProgress');
+    const questionTitle = document.getElementById('questionTitle');
+    const questionPhoto = document.getElementById('questionPhoto');
+    const answers = document.getElementById('answers');
+    const quizNote = document.getElementById('quizNote');
+    const finalGate = document.getElementById('finalGate');
+    const openFinal = document.getElementById('openFinal');
+    const videoSection = document.getElementById('videoSection');
+
+    const questions = [
+      {
+        text: 'В какой город мы первый раз полетели на самолёте?',
+        options: ['Ярославль', 'Сочи', 'Казань', 'Калининград'],
+        correct: 2,
+        photoLabel: 'Фото к вопросу 1 / первый совместный полёт'
+      },
+      {
+        text: 'С кем первым познакомился Лёша из твоей семьи лично?',
+        options: ['Папа', 'Мама', 'Бабу', 'Люлюка'],
+        correct: 1,
+        photoLabel: 'Фото к вопросу 2 / первое знакомство с семьёй'
+      },
+      {
+        text: 'Какой подарок ты подарила Лёше на первый совместный Новый год?',
+        options: ['Толстовка Fila', 'Носки', 'Плэйстейшен', 'Просто поздравила, я и есть его главный подарок'],
+        correct: 0,
+        photoLabel: 'Фото к вопросу 3 / первый совместный Новый год'
+      },
+      {
+        text: 'В каком году в вашей семье появился Richard?',
+        options: ['2023', '2024', '2025', '2026'],
+        correct: 1,
+        photoLabel: 'Фото к вопросу 4 / появление Richard'
+      }
+    ];
+
+    let currentQuestion = 0;
+
+    accessForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const value = codeInput.value.trim().toUpperCase().replace(/Ё/g, 'Е');
+
+      if (value === SECRET_CODE) {
+        accessMessage.className = 'message ok';
+        accessMessage.innerHTML = 'Проверка пройдена.<br>Richard подтверждает: доступ разрешён.';
+
+        setTimeout(() => {
+          accessScreen.classList.add('hidden');
+          mainContent.classList.remove('hidden');
+          requestAnimationFrame(() => mainContent.classList.add('visible'));
+          renderQuestion();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 650);
+      } else {
+        accessMessage.className = 'message error';
+        accessMessage.textContent = 'Не-а. Richard пока не узнаёт эту фразу.';
+      }
+    });
+
+    function renderQuestion() {
+      const question = questions[currentQuestion];
+      quizProgress.textContent = `Вопрос ${currentQuestion + 1} из ${questions.length}`;
+      questionPhoto.textContent = question.photoLabel || `Фото к вопросу ${currentQuestion + 1}`;
+      questionTitle.textContent = question.text;
+      answers.innerHTML = '';
+      quizNote.textContent = '';
+
+      question.options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.className = 'answer-btn';
+        button.type = 'button';
+        button.textContent = `${index + 1}. ${option}`;
+        button.addEventListener('click', () => checkAnswer(index));
+        answers.appendChild(button);
+      });
+    }
+
+    function checkAnswer(index) {
+      const question = questions[currentQuestion];
+
+      if (index !== question.correct) {
+        quizNote.textContent = 'Почти. Richard прищурился и просит подумать ещё раз.';
+        return;
+      }
+
+      currentQuestion += 1;
+
+      if (currentQuestion < questions.length) {
+        renderQuestion();
+      } else {
+        document.querySelector('.quiz-wrap').classList.add('hidden');
+        finalGate.classList.remove('hidden');
+        finalGate.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    openFinal.addEventListener('click', function() {
+      videoSection.classList.remove('hidden');
+      videoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  </script>
+</body>
+</html>
