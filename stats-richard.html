@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Richard Stats</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f0f10;
+      color: #f2f2f2;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 20px;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+      font-weight: 400;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: #161618;
+      border: 1px solid #2a2a2e;
+      padding: 18px;
+      border-radius: 10px;
+    }
+
+    .label {
+      font-size: 12px;
+      opacity: 0.6;
+      margin-bottom: 10px;
+    }
+
+    .value {
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 12px;
+      opacity: 0.4;
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>RICHARD • WEDDING ANALYTICS</h1>
+
+    <div class="grid">
+      <div class="card">
+        <div class="label">VISITS</div>
+        <div class="value" id="visits">—</div>
+      </div>
+
+      <div class="card">
+        <div class="label">VK JOINS</div>
+        <div class="value" id="vk_join">—</div>
+      </div>
+
+      <div class="card">
+        <div class="label">TELEGRAM JOINS</div>
+        <div class="value" id="tg_join">—</div>
+      </div>
+
+      <div class="card">
+        <div class="label">MUSIC TOGGLES</div>
+        <div class="value" id="music">—</div>
+      </div>
+
+      <div class="card">
+        <div class="label">VK CLICKS</div>
+        <div class="value" id="vk_click">—</div>
+      </div>
+
+      <div class="card">
+        <div class="label">TG CLICKS</div>
+        <div class="value" id="tg_click">—</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Richard is watching quietly 🐾
+    </div>
+  </div>
+
+  <script>
+    const API_URL = "/stats"; 
+    // если не работает — замени на:
+    // https://твой-worker-url/stats
+
+    async function loadStats() {
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+
+        document.getElementById("visits").textContent = data["stats:visits"] || 0;
+        document.getElementById("vk_join").textContent = data["stats:vk_join"] || 0;
+        document.getElementById("tg_join").textContent = data["stats:tg_join"] || 0;
+        document.getElementById("music").textContent = data["stats:music_toggle"] || 0;
+        document.getElementById("vk_click").textContent = data["stats:vk_click"] || 0;
+        document.getElementById("tg_click").textContent = data["stats:tg_click"] || 0;
+
+      } catch (e) {
+        console.log("stats error", e);
+      }
+    }
+
+    loadStats();
+  </script>
+</body>
+</html>
